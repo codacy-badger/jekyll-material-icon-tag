@@ -1,7 +1,7 @@
-require "swedbank_pay_jeyll_icon_tag/version"
+require "swedbank_pay_jekyll_icon_tag/version"
 require 'Liquid'
 
-module SwedbankPayJeyllIconTag
+module SwedbankPayjekyllIconTag
   class IconTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
