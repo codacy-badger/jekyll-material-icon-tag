@@ -13,5 +13,5 @@ module SwedbankPayJeyllIconTag
     end
   end
   
-  Liquid::Template.register_tag('icon', self)
+  Liquid::Template.register_tag "icon", self
 end
