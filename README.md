@@ -18,6 +18,12 @@ Or install it yourself as:
 
 Use as a jekyll gem
 
+To render a Material Design Icon use as follows:
+
+```liquid
+{% icon name_of_icon_you_want %}
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
