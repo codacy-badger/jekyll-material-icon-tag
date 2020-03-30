@@ -3,40 +3,73 @@ name: Ruby Gem
 on:
   push:
     branches: [ master ]
+    tags:
+    - '*'
   pull_request:
     branches: [ master ]
 
 jobs:
   build:
-    name: Build + Publish
+    name: Build, Test and Publish
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
       with:
-        version: 2.6.x
+        ruby-version: 2.6.x
+
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: ${{ runner.os }}-gems-
+
+    - name: Bundle install
+      run: |
+        gem install bundler
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+
+
+    - name: Test with Rake
+      run: bundle exec rake
+
+    - name: Build gem
+      id: gem
+      run: |
+        GEM_BUILD_NAME=$(gem build swedbank_pay_jekyll_icon_tag.gemspec | awk '/File/ {print $2}')
+        echo "Gem filename: '${GEM_BUILD_NAME}'"
+        echo "::set-output name=name::${GEM_BUILD_NAME}"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2-preview
+      with:
+        name: ${{ steps.gem.outputs.name }}
+        path: ${{ steps.gem.outputs.name }}
 
     - name: Publish to GPR
+      if: startsWith(github.ref, 'refs/tags/') # Only publish tagged commits
       run: |
         mkdir -p $HOME/.gem
         touch $HOME/.gem/credentials
         chmod 0600 $HOME/.gem/credentials
         printf -- "---\n:github: Bearer ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem build *.gemspec
-        gem push --KEY github --host https://rubygems.org/ *.gem
+        gem push --KEY github --host https://rubygems.org/ ${{ steps.gem.outputs.name }}
       env:
         GEM_HOST_API_KEY: ${{secrets.SECRET_GITHUB_TOKEN}}
         OWNER: username
 
     - name: Publish to RubyGems
+      if: startsWith(github.ref, 'refs/tags/') # Only publish tagged commits
       run: |
         mkdir -p $HOME/.gem
         touch $HOME/.gem/credentials
         chmod 0600 $HOME/.gem/credentials
         printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem build *.gemspec
-        gem push *.gem
+        gem push ${{ steps.gem.outputs.name }}
       env:
         GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
