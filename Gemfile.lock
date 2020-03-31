@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    swedbank_pay_jekyll_icon_tag (0.1.0)
+    jekyll_icon_tag (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -15,7 +15,7 @@ PLATFORMS
 DEPENDENCIES
   liquid (~> 4.0)
   rake (~> 12.0)
-  swedbank_pay_jekyll_icon_tag!
+  jekyll_icon_tag!
 
 BUNDLED WITH
    2.1.4

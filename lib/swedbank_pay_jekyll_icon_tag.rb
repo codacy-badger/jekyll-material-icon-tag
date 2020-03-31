@@ -1,4 +1,4 @@
-require "swedbank_pay_jekyll_icon_tag/version"
+require "jekyll_icon_tag/version"
 require 'Liquid'
 
 class IconTag < Liquid::Tag

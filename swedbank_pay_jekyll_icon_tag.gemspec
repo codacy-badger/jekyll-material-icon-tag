@@ -1,7 +1,7 @@
-require_relative 'lib/swedbank_pay_jekyll_icon_tag/version'
+require_relative 'lib/jekyll_icon_tag/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "swedbank_pay_jekyll_icon_tag"
+  spec.name          = "jekyll_icon_tag"
   spec.version       = SwedbankPayjekyllIconTag::VERSION
   spec.authors       = ["Nullint"]
   spec.email         = ["daniel.granerud@payex.com"]
