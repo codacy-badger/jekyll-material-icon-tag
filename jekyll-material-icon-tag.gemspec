@@ -1,8 +1,8 @@
-require_relative 'lib/jekyll_icon_tag/version'
+require_relative 'lib/jekyll-material-icon-tag/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "jekyll_icon_tag"
-  spec.version       = JekyllIconTag::VERSION
+  spec.name          = "jekyll-material-icon-tag"
+  spec.version       = JekyllMaterialIconTag::VERSION
   spec.authors       = ["Nullint"]
   spec.email         = ["daniel.granerud@payex.com"]
 

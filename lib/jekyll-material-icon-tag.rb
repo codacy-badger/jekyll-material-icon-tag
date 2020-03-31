@@ -1,4 +1,4 @@
-require "jekyll_icon_tag/version"
+require "jekyll-material-icon-tag/version"
 require 'Liquid'
 
 class IconTag < Liquid::Tag
