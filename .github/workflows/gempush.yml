@@ -82,8 +82,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2-preview
       with:
-        name: ${{ steps.gem.outputs.name }}
-        path: ${{ steps.gem.outputs.name }}
+        name: ${{ steps.gemversion.outputs.name }}
+        path: ${{ steps.gemversion.outputs.name }}
 
     - name: Publish to GPR
       env:
