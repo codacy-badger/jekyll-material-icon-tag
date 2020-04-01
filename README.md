@@ -7,12 +7,13 @@ gem 'jekyll-material-icon-tag'
 ```
 
 And then execute:
-
-    $ bundle install
-
+```shell
+$ bundle install
+```
 Or install it yourself as:
-
-    $ gem install jekyll-material-icon-tag
+```shell
+$ gem install jekyll-material-icon-tag
+```
 
 ## Usage
 
@@ -24,16 +25,9 @@ To render a Material Design Icon use as follows:
 {% icon name_of_icon_you_want %}
 ```
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jekyll-material-icon-tag. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/jekyll-material-icon-tag/blob/master/CODE_OF_CONDUCT.md).
-
 
 ## License
 
