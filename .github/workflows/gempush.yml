@@ -75,15 +75,15 @@ jobs:
       env:
         GEM_VERSION: ${{ steps.gemversion.outputs.version }}
       run: |
-        GEM_BUILD_NAME=$(gem build kramdown-plantuml.gemspec | awk '/File/ {print $2}')
+        GEM_BUILD_NAME=$(gem build jekyll-material-icon-tag.gemspec | awk '/File/ {print $2}')
         echo "Gem filename: '${GEM_BUILD_NAME}'"
         echo "::set-output name=name::${GEM_BUILD_NAME}"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2-preview
       with:
-        name: ${{ steps.gemversion.outputs.name }}
-        path: ${{ steps.gemversion.outputs.name }}
+        name: ${{ steps.gem.outputs.name }}
+        path: ${{ steps.gem.outputs.name }}
 
     - name: Publish to GPR
       env:
