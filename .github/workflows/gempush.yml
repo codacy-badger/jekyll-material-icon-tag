@@ -81,27 +81,27 @@ jobs:
         path: ${{ steps.gem.outputs.name }}
 
     - name: Publish to GPR
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      OWNER: SwedbankPay
-    run: |
-      mkdir -p $HOME/.gem
-      touch $HOME/.gem/credentials
-      chmod 0600 $HOME/.gem/credentials
-      printf -- "---\n:github: Bearer ${GITHUB_TOKEN}\n" > $HOME/.gem/credentials
-      set -e
-      gem push --KEY github \
-                --host https://rubygems.pkg.github.com/${OWNER} \
-                ${{ steps.gem.outputs.name }} \
-        || echo "push failed ($?) probably due to version '${{ steps.gemversion.outputs.version }}' already existing in GPR."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OWNER: SwedbankPay
+      run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 0600 $HOME/.gem/credentials
+        printf -- "---\n:github: Bearer ${GITHUB_TOKEN}\n" > $HOME/.gem/credentials
+        set -e
+        gem push --KEY github \
+                  --host https://rubygems.pkg.github.com/${OWNER} \
+                  ${{ steps.gem.outputs.name }} \
+          || echo "push failed ($?) probably due to version '${{ steps.gemversion.outputs.version }}' already existing in GPR."
 
-  - name: Publish to RubyGems
-    if: startsWith(github.ref, 'refs/tags/') # Only publish tagged commits
-    env:
-      RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-    run: |
-      mkdir -p $HOME/.gem
-      touch $HOME/.gem/credentials
-      chmod 0600 $HOME/.gem/credentials
-      printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}\n" > $HOME/.gem/credentials
-      gem push ${{ steps.gem.outputs.name }}
+    - name: Publish to RubyGems
+      if: startsWith(github.ref, 'refs/tags/') # Only publish tagged commits
+      env:
+        RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 0600 $HOME/.gem/credentials
+        printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}\n" > $HOME/.gem/credentials
+        gem push ${{ steps.gem.outputs.name }}
