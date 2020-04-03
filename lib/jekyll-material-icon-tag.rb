@@ -1,5 +1,5 @@
 require "jekyll-material-icon-tag/version"
-require 'Liquid'
+require 'liquid'
 
 class IconTag < Liquid::Tag
   def initialize(tag_name, text, tokens)
