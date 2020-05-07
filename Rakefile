@@ -11,8 +11,8 @@ end
 # Rake Jekyll tasks
 task :build do
   conf = Jekyll.configuration({
-    'source'      => 'test/jekyll-material-icon-tag',
-    'destination' => '_site'
+    'source'      => './test/jekyll-material-icon-tag',
+    'destination' => './_site/'
   })
   puts 'Building site...'.bold
   Jekyll::Commands::Build.process(profile: true)

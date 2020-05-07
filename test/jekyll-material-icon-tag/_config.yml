@@ -1,4 +1,2 @@
 plugins:
-  - jemoji
   - jekyll-material-icon-tag
-  - "kramdown-plantuml"
