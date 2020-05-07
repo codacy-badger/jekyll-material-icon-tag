@@ -9,3 +9,5 @@
 bin/
 *.gem
 /Gemfile.lock
+.jekyll-cache/
+_site/
