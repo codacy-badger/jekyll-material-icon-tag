@@ -34,10 +34,6 @@ task :test => :build do
     raise "Hell"
   end
 
-  if content.include? "<i class=\"material-icons\">"
-    puts "Nice"
-  end
-
   file.close
 end
 
